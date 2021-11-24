@@ -1,15 +1,24 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Links from "./components/Links";
+import NavLinks from "./components/NavLinks";
+import Login from "./pages/Login";
+
+const isLogin = false;
 
 function App() {
   return (
     <BrowserRouter>
       <Links />
+      <NavLinks />
       <Switch>
+        <Route
+          path="/login"
+          render={() => (isLogin ? <Redirect to="/" /> : <Login />)}
+        />
         <Route path="/profile/:id" component={Profile} />
         <Route path="/profile" component={Profile} />
         <Route path="/about" component={About} />
